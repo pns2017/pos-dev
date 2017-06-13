@@ -77,6 +77,16 @@ class Customers_model extends CI_Model {
 
         return $query;
     }
+
+    // get both sku and product names
+    function get_customers_list()
+    {
+        $this->db->from($this->table);
+        $this->db->where('removed','0');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
  
     function count_filtered()
     {
