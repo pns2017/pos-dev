@@ -39,7 +39,8 @@ th#cart.text-center{
   color: #999
 }
 
-.tt-menu {    /* used to be tt-dropdown-menu in older versions */
+.tt-menu {  
+  /* used to be tt-dropdown-menu in older versions */
   width: 500px;
   font-size: 18px;
   margin-top: 4px;
