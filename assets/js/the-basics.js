@@ -20,15 +20,28 @@ var substringMatcher = function(strs) {
   };
 };
 
-// retrieved from transaction view. evaluated as array
-var states = eval($('#json_list').html());
+// retrieved from transaction view. evaluated as array - item names
+var products = eval($('#json_list_products').html());
 
-$('#the-basics .typeahead').typeahead({
+$('#the-basics-products .typeahead').typeahead({
   hint: true,
   highlight: true,
   minLength: 1
 },
 {
-  name: 'states',
-  source: substringMatcher(states)
+  name: 'products',
+  source: substringMatcher(products)
+});
+
+// retrieved from transaction view. evaluated as array - customer names
+var customers = eval($('#json_list_customers').html());
+
+$('#the-basics-customers .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'customers',
+  source: substringMatcher(customers)
 });
