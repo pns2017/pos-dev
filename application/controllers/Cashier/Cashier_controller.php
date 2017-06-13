@@ -19,6 +19,7 @@ class Cashier_controller extends CI_Controller {
     //     redirect('/');
     // }
     // else{
+    
 
     // get products list (SKU and product name) for dropdown on the add stock form
     $data['inventory'] = $this->inventory->get_products_list();
