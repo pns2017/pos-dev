@@ -28,6 +28,8 @@ td#cart.text-center{
 th#cart.text-center{
 	border: 1px solid #e7ebee;
 }
+<<<<<<< HEAD
+=======
 
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -71,3 +73,4 @@ th#cart.text-center{
 .tt-suggestion p {
   margin: 0;
 }
+>>>>>>> remotes/origin/master
