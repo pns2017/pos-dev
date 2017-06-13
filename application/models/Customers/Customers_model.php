@@ -68,6 +68,7 @@ class Customers_model extends CI_Model {
     // check for duplicates in the database table for validation
     function get_duplicates($lastname, $firstname, $middlename)
     {
+        
         $this->db->from($this->table);
         $this->db->where('lastname',$lastname);
         $this->db->where('firstname',$firstname);
