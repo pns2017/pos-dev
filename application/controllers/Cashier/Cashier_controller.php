@@ -7,6 +7,8 @@ class Cashier_controller extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('inventory/inventory_model','inventory');
+    $this->load->model('customers/customers_model','customers');
+
     $this->load->model('cashier/cashier_model','cashier');
   }
 
@@ -20,6 +22,8 @@ class Cashier_controller extends CI_Controller {
 
     // get products list (SKU and product name) for dropdown on the add stock form
     $data['inventory'] = $this->inventory->get_products_list();
+    $data['customers'] = $this->customers->get_customers_list();
+
     $this->load->helper('url');							
     									
     $data['title'] = 'Transaction Page';					
