@@ -26,13 +26,30 @@
                             <div class="col-md-6">
                                 <form role="search">
                                     <div class="input-group">
-                                      <input class="form-control" placeholder="Search" id="srch-term" type="text">
-                                      <div class="input-group-btn">
-                                        <button id="btn_search" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                                      </div>
+                                        <div id="the-basics">
+                                            <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search" style="width:500px; font-size: 18px;">
+                                        </div>
+
+                                          <div class="input-group-btn">
+                                            <button id="btn_search" class="btn btn-default" type="submit" style="margin-top: -3px;"><i class="fa fa-search"></i></button>
+                                          </div>
                                     </div>
                                 </form>
-             
+                                
+
+                                <?php
+                                    // get products list from inventory 
+                                    for($i = 0; $i < count($inventory); $i++){
+                                        $products_list[$i] = $inventory[$i]->sku . ': ' . $inventory[$i]->name;
+                                    }
+                                    // converting php array to javascript (json)
+                                    $json_list = json_encode($products_list);
+
+                                    // output json_list to be retrieved by javascript for combo box (the-basic.js)
+                                ?>
+                                <span id="json_list" class="hidden"><?php echo $json_list ?></span>
+
+
                                 <!--Condensed Table-->
                                 <!--===================================================-->
                                 <div class="panel-body tran_container">
@@ -63,7 +80,7 @@
                         <div class="col-md-5">
                             <!--Bordered Table-->
                                 <!--===================================================-->
-                                <div class="panel-body">
+                                <div class="panel-body" style="float:left; margin-top:-35px;">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Items in Cart <i class="fa fa-shopping-cart"></i></h3> 
                                     </div>
@@ -72,27 +89,72 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" id='cart'>SKU</th>
-                                                    <th class="text-center" id='cart'>Item Name</th>
+                                                    <th class="text-center" id='cart'>ItemName</th>
+                                                    <th class="text-center" id='cart'>Price</th>
                                                     <th class="text-center" id='cart'>Quantity</th>
                                                     <th class="text-center" id='cart'>Discount (%)</th>
+                                                    <th class="text-center" id='cart'>Extended</th>
                                                     <th class="text-center" id='cart'>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <!-- <tr>
                                                     <td class="text-center" id='cart'>1</td>
                                                     <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
                                                     <td class="text-center" id='cart'>5</td>
                                                     <td class="text-center" id='cart'><select class="1-100"></select></td>
+                                                    <td class="text-center" id='cart'>20.00</td>
                                                     <td class="text-center" id='cart'>
                                                         <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
                                                     </td>
                                                 </tr>
+                                                 <tr>
+                                                    <td class="text-center" id='cart'>1</td>
+                                                    <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
+                                                    <td class="text-center" id='cart'>5</td>
+                                                    <td class="text-center" id='cart'><select class="1-100"></select></td>
+                                                    <td class="text-center" id='cart'>20.00</td>
+                                                    <td class="text-center" id='cart'>
+                                                        <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td class="text-center" id='cart'>1</td>
+                                                    <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
+                                                    <td class="text-center" id='cart'>5</td>
+                                                    <td class="text-center" id='cart'><select class="1-100"></select></td>
+                                                    <td class="text-center" id='cart'>20.00</td>
+                                                    <td class="text-center" id='cart'>
+                                                        <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td class="text-center" id='cart'>1</td>
+                                                    <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
+                                                    <td class="text-center" id='cart'>5</td>
+                                                    <td class="text-center" id='cart'><select class="1-100"></select></td>
+                                                    <td class="text-center" id='cart'>20.00</td>
+                                                    <td class="text-center" id='cart'>
+                                                        <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td class="text-center" id='cart'>1</td>
+                                                    <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
+                                                    <td class="text-center" id='cart'>5</td>
+                                                    <td class="text-center" id='cart'><select class="1-100"></select></td>
+                                                    <td class="text-center" id='cart'>5</td>
+                                                    <td class="text-center" id='cart'>
+                                                        <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
+                                                    </td>
+                                                </tr> -->
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div style="position: fixed; margin-top: 330px;">
+                                    <div class="col-md-6">
                                         <div class="panel media pad-all">
                                             <div class="media-left">
                                                 <span class="icon-wrap icon-wrap-sm icon-circle bg-info">
@@ -120,10 +182,12 @@
                                             </div>
                                         </div>
                                     </div>
-                            <div class="btn-group btn-group-justified">
-                                <a href="javascript:void(0)" class="btn btn-lg btn-mint">Cancel</a>
-                                <a href="javascript:void(0)" class="btn btn-lg btn-danger">Payment</a>
-                            </div>
+                                    <div class="btn-group btn-group-justified">
+                                        <a href="javascript:void(0)" class="btn btn-lg btn-mint" style="">Cancel</a>
+                                        <a href="javascript:void(0)" class="btn btn-lg btn-danger">Payment</a>
+                                    </div>
+                                </div>
+                            
                         </div>
                     </div>
                 </div>
