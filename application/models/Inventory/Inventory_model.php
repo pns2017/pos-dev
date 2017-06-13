@@ -76,7 +76,7 @@ class Inventory_model extends CI_Model {
 		return $query;
 	}
 
-	// get suppliers name
+	// get product name
 	function get_product_name($sku)
 	{
 		$this->db->select('name');
@@ -88,6 +88,16 @@ class Inventory_model extends CI_Model {
 
 		return $row->name;
 	}
+
+	// get both sku and product names
+	function get_products_list()
+	{
+		$this->db->from($this->table);
+        $this->db->where('removed','0');
+        $query = $this->db->get();
+
+        return $query->result();
+	}	
 
 	// get current in stock for validation
 	function get_in_stock($sku)
