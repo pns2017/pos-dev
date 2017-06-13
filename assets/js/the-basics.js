@@ -20,6 +20,7 @@ var substringMatcher = function(strs) {
   };
 };
 
+
 // retrieved from transaction view. evaluated as array - item names
 var products = eval($('#json_list_products').html());
 
