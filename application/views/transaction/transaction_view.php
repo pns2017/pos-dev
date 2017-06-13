@@ -20,14 +20,18 @@
                 <!--End breadcrumb-->
                 <!--Page content-->
                 <!--===================================================-->
-                <div id="page-content">  <!--Searchbox-->
+                <div id="page-content">  
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
+
+
+                                <!--Item Name Searchbox-->
+                                <!--=================================================================================-->
                                 <form role="search">
                                     <div class="input-group">
-                                        <div id="the-basics">
-                                            <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search" style="width:500px; font-size: 18px;">
+                                        <div id="the-basics-products">
+                                            <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search Item" style="width:500px; font-size: 18px;">
                                         </div>
 
                                           <div class="input-group-btn">
@@ -40,15 +44,17 @@
                                 <?php
                                     // get products list from inventory 
                                     for($i = 0; $i < count($inventory); $i++){
-                                        $products_list[$i] = $inventory[$i]->sku . ': ' . $inventory[$i]->name;
+                                        $products_list[$i] = $inventory[$i]->sku . ': ' . $inventory[$i]->name . ' ----- Php ' . $inventory[$i]->unit_price;
                                     }
                                     // converting php array to javascript (json)
-                                    $json_list = json_encode($products_list);
+                                    $json_list_products = json_encode($products_list);
 
                                     // output json_list to be retrieved by javascript for combo box (the-basic.js)
                                 ?>
-                                <span id="json_list" class="hidden"><?php echo $json_list ?></span>
+                                <span id="json_list_products" class="hidden"><?php echo $json_list_products ?></span>
 
+                                <!--END Item Name Searchbox-->
+                                <!--=================================================================================-->
 
                                 <!--Condensed Table-->
                                 <!--===================================================-->
@@ -76,7 +82,37 @@
                                             </tbody>
                                     </table>
                                 </div><!--===================================================--><!--End Condensed Table-->
-                        </div> <!-- end of col-md-7 -->
+
+                                <!--Customer Name Searchbox-->
+                                <!--=================================================================================-->
+                                <form role="search">
+                                    <div class="input-group">
+                                        <div id="the-basics-customers">
+                                            <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search Customer" style="width:500px; font-size: 18px;">
+                                        </div>
+
+                                          <!-- <div class="input-group-btn">
+                                            <button id="btn_search" class="btn btn-default" type="submit" style="margin-top: -3px;"><i class="fa fa-search"></i></button>
+                                          </div> -->
+                                    </div>
+                                </form>
+
+                                <?php
+                                    // get customers list from customers 
+                                    for($i = 0; $i < count($customers); $i++){
+                                        $customers_list[$i] = $customers[$i]->lastname . ', ' . $customers[$i]->firstname . ' ' . $customers[$i]->middlename;
+                                    }
+                                    // converting php array to javascript (json)
+                                    $json_list_customers = json_encode($customers_list);
+
+                                    // output json_list to be retrieved by javascript for combo box (the-basic.js)
+                                ?>
+                                <span id="json_list_customers" class="hidden"><?php echo $json_list_customers ?></span>
+
+                                <!--END Customer Name Searchbox-->
+                                <!--=================================================================================-->
+
+                        </div> <!-- end of col-md-6 -->
                         <div class="col-md-5">
                             <!--Bordered Table-->
                                 <!--===================================================-->
