@@ -99,6 +99,8 @@ $route['update-priveleges/(:num)'] = 'users/users_controller/ajax_priveleges_upd
 $route['delete-user/(:num)'] = 'users/users_controller/ajax_delete/$1';
 
 
-//************************************** USERS
+//************************************** CASHIER
 //**************************************
 $route['transaction-page'] = 'cashier/cashier_controller/index';
+
+$route['view-product/(:num)'] = 'inventory/inventory_controller/ajax_edit/$1';
