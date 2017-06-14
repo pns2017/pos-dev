@@ -132,6 +132,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="btnSave" onclick="save()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>
+
                             <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> &nbsp;Cancel</button>
                         </div>
                     </div><!-- /.modal-content -->
@@ -157,7 +158,7 @@
                                   <form action = "" method = "" style = "float:right;">
                                     <input type="hidden" value="" name="sku"/> 
                                      <br /><br /> <br /><br /> <br /><br />   
-                                     <input type = "file" name = "userfile" size = "20" style = "padding-left: 20px;"/> 
+                                     <input type = "file" name = "userfile" id="userfile" size = "20" style = "padding-left: 20px;"/> 
                                      <br /><br /> 
                                      <span class="help-block"></span>
                                      <input type = "submit" value = "upload" class="btn btn-success" style = "margin-left: 20px;"/>
@@ -328,8 +329,9 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button type="button" id="btnSave" onclick="save()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>
+                            
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> &nbsp;Cancel</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -398,8 +400,9 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button type="button" id="btnSave" onclick="save()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> &nbsp;Cancel</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
