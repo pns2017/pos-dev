@@ -72,4 +72,7 @@ th#cart.text-center{
 .tt-suggestion p {
   margin: 0;
 }
->>>>>>> remotes/origin/master
+div.panel-body.tran_container{
+      height: 300px;
+      overflow: scroll;
+}
