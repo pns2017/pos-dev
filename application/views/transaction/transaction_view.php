@@ -52,7 +52,7 @@
 
                                 <!--Condensed Table-->
                                 <!--===================================================-->
-                                <div class="panel-body tran_container">
+                                <div class="panel-body">
                                     <table class="table  table-condensed">
                                             <thead>
                                                 <tr>
@@ -80,7 +80,7 @@
                         <div class="col-md-5">
                             <!--Bordered Table-->
                                 <!--===================================================-->
-                                <div class="panel-body" style="float:left; margin-top:-35px;">
+                                <div class="panel-body tran_container">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Items in Cart <i class="fa fa-shopping-cart"></i></h3> 
                                     </div>
@@ -92,68 +92,27 @@
                                                     <th class="text-center" id='cart'>ItemName</th>
                                                     <th class="text-center" id='cart'>Price</th>
                                                     <th class="text-center" id='cart'>Quantity</th>
-                                                    <th class="text-center" id='cart'>Discount (%)</th>
                                                     <th class="text-center" id='cart'>Extended</th>
                                                     <th class="text-center" id='cart'>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- <tr>
+                                                <tr>
                                                     <td class="text-center" id='cart'>1</td>
                                                     <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
                                                     <td class="text-center" id='cart'>5</td>
-                                                    <td class="text-center" id='cart'><select class="1-100"></select></td>
+                                                    <td class="text-center" id='cart'>11</select></td>
                                                     <td class="text-center" id='cart'>20.00</td>
                                                     <td class="text-center" id='cart'>
                                                         <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
                                                     </td>
                                                 </tr>
-                                                 <tr>
-                                                    <td class="text-center" id='cart'>1</td>
-                                                    <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
-                                                    <td class="text-center" id='cart'>5</td>
-                                                    <td class="text-center" id='cart'><select class="1-100"></select></td>
-                                                    <td class="text-center" id='cart'>20.00</td>
-                                                    <td class="text-center" id='cart'>
-                                                        <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                 <tr>
-                                                    <td class="text-center" id='cart'>1</td>
-                                                    <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
-                                                    <td class="text-center" id='cart'>5</td>
-                                                    <td class="text-center" id='cart'><select class="1-100"></select></td>
-                                                    <td class="text-center" id='cart'>20.00</td>
-                                                    <td class="text-center" id='cart'>
-                                                        <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                 <tr>
-                                                    <td class="text-center" id='cart'>1</td>
-                                                    <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
-                                                    <td class="text-center" id='cart'>5</td>
-                                                    <td class="text-center" id='cart'><select class="1-100"></select></td>
-                                                    <td class="text-center" id='cart'>20.00</td>
-                                                    <td class="text-center" id='cart'>
-                                                        <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                 <tr>
-                                                    <td class="text-center" id='cart'>1</td>
-                                                    <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
-                                                    <td class="text-center" id='cart'>5</td>
-                                                    <td class="text-center" id='cart'><select class="1-100"></select></td>
-                                                    <td class="text-center" id='cart'>5</td>
-                                                    <td class="text-center" id='cart'>
-                                                        <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr> -->
 
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <div style="position: fixed; margin-top: 330px;">
+                                <div">
                                     <div class="col-md-6">
                                         <div class="panel media pad-all">
                                             <div class="media-left">
@@ -183,8 +142,11 @@
                                         </div>
                                     </div>
                                     <div class="btn-group btn-group-justified">
-                                        <a href="javascript:void(0)" class="btn btn-lg btn-mint" style="">Cancel</a>
-                                        <a href="javascript:void(0)" class="btn btn-lg btn-danger">Payment</a>
+                                        <a href="javascript:void(0)" class="btn btn-lg btn-info">Cancel</a>
+                                        <a href="javascript:void(0)" class="btn btn-lg btn-mint">Clear List</a>
+                                    </div>
+                                    <div class="btn-group btn-group-justified">
+                                        <a onclick="view_payment_report();" class="btn btn-lg btn-danger">Payment</a>
                                     </div>
                                 </div>
                             
@@ -198,39 +160,64 @@
             <!--END CONTENT CONTAINER-->
 
             <!-- Bootstrap modal (Password) -->
-            <div class="modal fade" id="modal_form_password" role="dialog">
+            <div class="modal fade" id="modal_payment" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h3 class="modal-title">User's Form</h3>
+                            <h3 class="modal-title">Payment modal</h3>
                         </div>
                         <div class="modal-body form">
                             <form action="#" id="form" class="form-horizontal">
-                                    <input type="hidden" name="id" value="<?php echo $users['user_id'] ?>"/> 
-                                   <div class="form-group">
-                                        <label class="control-label col-md-3">Password:</label>
-                                        <div class="col-md-9">
-                                            <input name="password" placeholder="Password" class="form-control" type="password">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Transaction ID :</label>
+                                        <div class="col-md-6">
+                                            <label class="control-label"><strong>00001</strong></label>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-3">Re-enter Password:</label>
-                                        <div class="col-md-9">
-                                            <input name="repassword" placeholder="Re-enter Password" class="form-control" type="password">
+                                        <label class="control-label col-md-3">Customer name :</label>
+                                        <div class="col-md-6">
+                                            <label class="control-label"><strong>John Smith</strong></label>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Number of Items :</label>
+                                        <div class="col-md-6">
+                                            <label class="control-label"><strong>40</strong></label>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Total Payable :</label>
+                                        <div class="col-md-6">
+                                            <label class="control-label"><strong>$1,000</strong></label>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="control-label col-md-3">Amount:</label>
+                                        <div class="col-md-6">
+                                            <input name="trans_amount" placeholder="Enter Amount" class="form-control" type="text">
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Balance :</label>
+                                        <div class="col-md-6">
+                                            <label class="control-label"> Sample Balance</label>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="btnSave" onclick="_save()" class="btn btn-primary">Save</button>
+                            <button type="button" id="btnSave" onclick="" class="btn btn-primary">Confirm & Print</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
             <!-- End Bootstrap modal -->
-
-            
