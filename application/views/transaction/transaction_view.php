@@ -28,18 +28,22 @@
 
                                 <!--Item Name Searchbox-->
                                 <!--=================================================================================-->
-                                <form role="search">
+                                
                                     <div class="input-group">
-                                        <div id="the-basics-products">
-                                            <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search Item" style="width:500px; font-size: 18px;">
-                                        </div>
+                                            <form role="search">
+                                                <div id="the-basics-products">
+                                                    <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search Item" style="width:500px; font-size: 18px;">
+                                                </div>
+                                            </form>
 
                                           <div class="input-group-btn">
-                                            <button id="btn_search" class="btn btn-default" type="submit" style="margin-top: -3px;"><i class="fa fa-search"></i></button>
+
+                                            <button class="btn btn-success" style="margin-top: -3px; height:48px; width:60px;" onclick="add_to_cart(document.getElementById('srch-term').value)"><i class="fa fa-cart-plus" style="font-size: 25px;"></i></button>
+
                                           </div>
                                     </div>
-                                </form>
                                 
+
                                 
 
                                 <?php
@@ -59,30 +63,7 @@
 
                                 <!--Condensed Table-->
                                 <!--===================================================-->
-                                <div class="panel-body">
-                                    <table class="table  table-condensed">
-                                            <thead>
-                                                <tr>
-                                                    <th>Invoice</th>
-                                                    <th>User</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><a href="#fakelink" class="btn-link">Order #53451</a></td>
-                                                    <td>Scott S. Calabrese</td>
-                                                    <td>5d</td>
-                                                    <td>$24.98</td>
-                                                    <td class="text-center">
-                                                        <a class="btn btn-xs btn-success add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Add to cart" data-container="body"><i class="fa fa-cart-plus"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                    </table>
-                                </div><!--===================================================--><!--End Condensed Table-->
+                                <br><br><br>
 
                                 <!--Customer Name Searchbox-->
                                 <!--=================================================================================-->
@@ -114,42 +95,36 @@
                                 <!--=================================================================================-->
 
                         </div> <!-- end of col-md-6 -->
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <!--Bordered Table-->
                                 <!--===================================================-->
+
                                 <div class="panel-body tran_container">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Items in Cart <i class="fa fa-shopping-cart"></i></h3> 
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
+                                        <table id="cashier-table" class="table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center" id='cart'>SKU</th>
-                                                    <th class="text-center" id='cart'>ItemName</th>
-                                                    <th class="text-center" id='cart'>Price</th>
-                                                    <th class="text-center" id='cart'>Quantity</th>
-                                                    <th class="text-center" id='cart'>Extended</th>
-                                                    <th class="text-center" id='cart'>Action</th>
+                                                    <th class="text-center">SKU</th>
+                                                    <th class="text-center">ItemName</th>
+                                                    <th class="text-center">Quantity</th>
+                                                    <th class="text-center">Price</th>
+                                                    <th class="text-center">Discount(%)</th>
+                                                    <th class="text-center">Extended</th>
+                                                    <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="text-center" id='cart'>1</td>
-                                                    <td class="text-center" id='cart'><a href="#" class="btn-link">Sample</a></td>
-                                                    <td class="text-center" id='cart'>5</td>
-                                                    <td class="text-center" id='cart'>11</select></td>
-                                                    <td class="text-center" id='cart'>20.00</td>
-                                                    <td class="text-center" id='cart'>
-                                                        <a class="btn btn-xs btn-danger add-tooltip"  data-toggle="tooltip" href="#" data-original-title="Delete" data-container="body"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-
+                                                
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <div">
+                                
+
+                                <div>
                                     <div class="col-md-6">
                                         <div class="panel media pad-all">
                                             <div class="media-left">
@@ -190,7 +165,7 @@
                         </div>
                     </div>
                 </div>
-                <!--===================================================-->
+                <!--===================================================
                 <!--End page content-->
             </div>
             <!--===================================================-->
@@ -253,6 +228,85 @@
                         <div class="modal-footer">
                             <button type="button" id="btnSave" onclick="" class="btn btn-primary">Confirm & Print</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <!-- End Bootstrap modal -->
+
+
+            <!-- Bootstrap modal for ADD TO CART -->
+            <div class="modal fade" id="modal_form_add_to_cart" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title">Add to Cart</h3>
+                        </div>
+                        <div class="modal-body form">
+
+                            <!-- <div class="form-group">
+
+                                <div align="center"><img id="image" style="width:200px; height:200px;"></div>
+
+                            </div>
+                            <hr> -->
+
+                            <form action="#" id="form_add_to_cart" class="form-horizontal">
+                                <input type="hidden" value="" name="item_sku"/>
+                                <input type="hidden" value="" name="item_name"/>
+                                <input type="hidden" value="" name="item_unit_price"/>
+                                <input type="hidden" value="" name="item_in_stock"/>
+                                
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">SKU :</label>
+                                        <div class="col-md-9">
+                                            <input name="sku" placeholder="SKU" class="form-control" type="text" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Product Name :</label>
+                                        <div class="col-md-9">
+                                            <input name="name" placeholder="Product Name" class="form-control" type="text" disabled>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label class="control-label col-md-3">Description :</label>
+                                        <div class="col-md-9">
+                                            <input name="description" placeholder="Description" class="form-control" type="text" disabled>
+                                        </div>
+                                    </div>
+                                    <hr> -->
+                                    <div class="row" style="padding-left: 50px;">
+                                    <div class="form-group col-xs-6">
+                                        <label style="width:100px;" class="control-label col-md-3">Unit Price :</label>
+                                        <div class="col-md-9" style="width:140px;">
+                                            <input name="unit_price" placeholder="Unit Price" class="form-control" type="text" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label style="width:100px;" class="control-label col-md-3">In Stock :</label>
+                                        <div class="col-md-9" style="width:140px;">
+                                            <input name="in_stock" placeholder="In Stock" class="form-control" type="text" disabled>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" style="font-size: 18px; font-weight: bold;">Quantity :</label>
+                                        <div class="col-md-9">
+                                            <input style="font-size: 18px; font-weight: bold;" name="quantity" placeholder="Quantity" class="form-control" type="number" value="1">
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" id="btnSave" onclick="save()" class="btn btn-primary"><i class="fa fa-cart-plus"></i> &nbsp;Add to Cart</button>
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> &nbsp;Cancel</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
