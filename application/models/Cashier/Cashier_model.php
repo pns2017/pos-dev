@@ -3,10 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Cashier_model extends CI_Model {
 
-	var $table = 'inventory';
-	var $column_order = array('sku','name','description','category','unit_cost','in_stock','unit_sold','unit_damaged','unit_lost','reorder_point',null); //set column field database for datatable orderable
-	var $column_search = array('sku','name','description','category'); //set column field database for datatable searchable those included are searchable
-	var $order = array('sku' => 'desc'); // default order 
+	var $table = 'cashier';
+	var $column_order = array('sku','name','quantity','unit_price','discount','extended',null); //set column field database for datatable orderable
+	var $column_search = array('sku','name'); //set column field database for datatable searchable those included are searchable
+	var $order = array('id' => 'asc'); // default order 
 
 	public function __construct()
 	{
@@ -59,78 +59,14 @@ class Cashier_model extends CI_Model {
 		if($_POST['length'] != -1)
 		$this->db->limit($_POST['length'], $_POST['start']);
 
-		// get only records that are not currently removed
-		$this->db->where('removed', '0');
 		$query = $this->db->get();
 		return $query->result();
-	}
-
-	// check for duplicates in the database table for validation
-	function get_duplicates($name)
-	{
-		$this->db->from($this->table);
-		$this->db->where('name',$name);
-
-		$query = $this->db->get();
-
-		return $query;
-	}
-
-	// get product name
-	function get_product_name($sku)
-	{
-		$this->db->select('name');
-		$this->db->from($this->table);
-		$this->db->where('sku',$sku);
-		$query = $this->db->get();
-
-		$row = $query->row();
-
-		return $row->name;
-	}
-
-	// get both sku and product names
-	function get_products_list()
-	{
-		$this->db->from($this->table);
-        $this->db->where('removed','0');
-        $query = $this->db->get();
-
-        return $query->result();
-	}	
-
-	// get current in stock for validation
-	function get_in_stock($sku)
-	{
-		$this->db->select('in_stock');
-		$this->db->from($this->table);
-		$this->db->where('sku',$sku);
-		$query = $this->db->get();
-
-		$row = $query->row();
-
-		return $row->in_stock;
-	}		
-
-	// get current unit damaged for validation
-	function get_unit_damaged($sku)
-	{
-		$this->db->select('unit_damaged');
-		$this->db->from($this->table);
-		$this->db->where('sku',$sku);
-		$query = $this->db->get();
-
-		$row = $query->row();
-
-		return $row->unit_damaged;
 	}		
 
 	function count_filtered()
 	{
         $this->_get_datatables_query();
 
-        // get only records that are not currently removed
-        $this->db->where('removed', '0');
         $query = $this->db->get();
         return $query->num_rows();		
 	}
@@ -138,19 +74,7 @@ class Cashier_model extends CI_Model {
 	public function count_all()
 	{
         $this->db->from($this->table);
-
-        // get only records that are not currently removed
-        $this->db->where('removed', '0');
         return $this->db->count_all_results();
-	}
-
-	public function get_by_id($sku)
-	{
-		$this->db->from($this->table);
-		$this->db->where('sku',$sku);
-		$query = $this->db->get();
-
-		return $query->row();
 	}
 
 	public function save($data)
@@ -163,23 +87,5 @@ class Cashier_model extends CI_Model {
 	{
 		$this->db->update($this->table, $data, $where);
 		return $this->db->affected_rows();
-	}
-
-	public function update_stock($sku, $quantity)
-	{
-		$this->db->where('sku',$sku);
-		$this->db->set('in_stock', 'in_stock + ' . (int) $quantity, FALSE);
-		$this->db->update($this->table);
-		
-		return $this->db->affected_rows();		
-	}
-
-	public function update_damaged($sku, $quantity)
-	{
-		$this->db->where('sku',$sku);
-		$this->db->set('unit_damaged', 'unit_damaged + ' . (int) $quantity, FALSE);
-		$this->db->update($this->table);
-		
-		return $this->db->affected_rows();		
 	}
 }
