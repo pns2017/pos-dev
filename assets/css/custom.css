@@ -76,3 +76,27 @@ div.panel-body.tran_container{
       height: 300px;
       overflow: scroll;
 }
+/*quantity, action*/
+#cashier-table td:nth-child(3),
+#cashier-table td:nth-child(7)
+{
+    text-align : center;
+    font-weight: bold;
+}
+/*price*/
+#cashier-table td:nth-child(4)
+{
+    text-align : right;
+}
+/*discount*/
+#cashier-table td:nth-child(5) 
+{
+    text-align : center;
+    font-style: italic;
+}
+/*extended*/
+#cashier-table td:nth-child(6)
+{
+    text-align : right;
+    font-weight: bold;
+}
