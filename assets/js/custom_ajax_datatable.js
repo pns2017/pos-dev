@@ -201,9 +201,48 @@
                           } 
                         }               
                     });           
-            }            
+            }
+            else if(tableID == "cashier-table")
+            {
+                    table = $('#cashier-table').DataTable({ 
+
+                        searching: false, paging: false,
+                 
+                        "processing": true, //Feature control the processing indicator.
+                        "serverSide": true, //Feature control DataTables' server-side processing mode.
+                        "order": [], //Initial no order.
+                 
+                        // Load data for the table's content from an Ajax source
+                        "ajax": {
+                            "url": "cashier/cashier_controller/ajax_list",
+                            "type": "POST",
+                        },
+                 
+                        //Set column definition initialisation properties.
+                        "columnDefs": [
+                        { 
+                            "targets": [ -1 ], //last column
+                            "orderable": false, //set not orderable
+                        },
+                        ],
+
+                        "rowCallback": function( row, data, index ) {
+                          var discount = data[4],
+                              $node = this.api().row(row).nodes().to$();
+
+                          if (discount != '' && discount != '0') {
+                             $node.css('background-color', '#99ffdd');
+                          } 
+                        }               
+                    });           
+            }          
         });
 
+        // reset file path everytime modal_form_view is closed - for image upload
+        $('#modal_form_view').on('hidden.bs.modal', function(){
+            $("#userfile").val("");
+        });
+        
         function view_product(sku)
         {
             if(document.getElementById('form_view') != null)
@@ -368,6 +407,57 @@
             $('.help-block').empty(); // clear error string
             $('#modal_form').modal('show'); // show bootstrap modal
             $('.modal-title').text('Add User'); // Set Title to Bootstrap modal title
+        }
+
+        function add_to_cart(item_data)
+        {       
+            //Loading the variable - Splitting search item data
+            var mystr = item_data;
+
+            //Splitting it with : as the separator
+            var myarr = mystr.split(":");
+
+            //Then read the values from the array where 0 is the first
+            var sku = myarr[0];
+
+
+            save_method = 'add-to-cart';
+
+            $('#form')[0].reset(); // reset form on modals
+            $('#form_add_to_cart')[0].reset(); // reset form on modals
+            $('.form-group').removeClass('has-error'); // clear error class
+            $('.help-block').empty(); // clear error string
+         
+            //Ajax Load data from ajax
+            $.ajax({
+                url : "inventory/inventory_controller/ajax_edit/" + sku,
+                type: "GET",
+                dataType: "JSON",
+                success: function(data)
+                {
+                    $('[name="sku"]').val(data.sku);
+                    // hidden item data values for retrieval (not disabled input)
+                    $('[name="item_sku"]').val(data.sku);
+                    $('[name="item_name"]').val(data.name);
+                    $('[name="item_unit_price"]').val(data.unit_price);
+                    $('[name="item_in_stock"]').val(data.in_stock);
+
+
+                    $('[name="name"]').val(data.name);
+                    // $('[name="description"]').val(data.description);
+                    $('[name="unit_price"]').val(data.unit_price);
+                    $('[name="in_stock"]').val(data.in_stock);
+                    // fetch image path
+                    // document.getElementById('image').src = "uploads/"+data.imgpath;
+
+                    $('#modal_form_add_to_cart').modal('show'); // show bootstrap modal
+                    $('.modal-title').text('Add to Cart'); // Set Title to Bootstrap modal title
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Item Not Found');
+                }
+            });
         }
 
         function edit_customer(id) // for customer table
@@ -619,6 +709,13 @@
                 // change form for damaged items to form_damaged_items
                 $form = '#form_damaged_items';
                 url = "inventory/inventory_controller/ajax_damaged_items";
+            }
+            // if damaged items
+            else if(save_method == 'add-to-cart') 
+            {
+                // change form for damaged items to form_damaged_items
+                $form = '#form_add_to_cart';
+                url = "cashier/cashier_controller/ajax_add_to_cart";
             }
          
             // ajax adding data to database
