@@ -16,7 +16,7 @@ class Damaged_items_controller extends CI_Controller {
 		$this->load->helper('url');
 
 		$data['title'] = 'Inventory';
-		$this->load->view('template/dashboard_header');
+		$this->load->view('template/dashboard_header', $data);
         $this->load->view('damaged_items/damaged_items_view', $data);
         $this->load->view('template/dashboard_navigation');
         $this->load->view('template/dashboard_footer');

@@ -14,7 +14,7 @@ class Customers_controller extends CI_Controller {
    	  $this->load->helper('url');							
    													
    	  $data['title'] = 'Customers List';					
-      $this->load->view('template/dashboard_header');
+      $this->load->view('template/dashboard_header',$data);
       $this->load->view('customers/customers_view',$data);   //Kani lang ang ilisi kung mag dungag mo ug Page
       $this->load->view('template/dashboard_navigation');
       $this->load->view('template/dashboard_footer');

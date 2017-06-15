@@ -5,7 +5,8 @@ class Sales extends CI_Controller {
 
    public function index()
    {
-      $this->load->view('template/dashboard_header');
+   	  $data['title'] = "Sales";
+      $this->load->view('template/dashboard_header', $data);
       $this->load->view('template/dashboard_sidebar');
       $this->load->view('sales/sales_view');
       $this->load->view('template/dashboard_footer');
