@@ -57,7 +57,7 @@
                         
                                     <!--Menu list item-->
                                     <li>
-                                        <a href="<?php echo base_url();?>transaction-page" >
+                                        <a href="<?php echo base_url();?>transaction-page" id="cash-id" class="cash-link">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span class="menu-title">Cashier</span> 
                                         </a>
