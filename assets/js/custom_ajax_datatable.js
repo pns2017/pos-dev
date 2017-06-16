@@ -207,6 +207,12 @@
                     table = $('#cashier-table').DataTable({ 
 
                         searching: false, paging: false,
+                        "bInfo" : false,
+                        "oLanguage": 
+                        {
+                            "sEmptyTable": ' ',
+                            "sInfoEmpty": 'as'
+                        },
                  
                         "processing": true, //Feature control the processing indicator.
                         "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -460,6 +466,27 @@
             });
         }
 
+        function cancel_item(sku)
+        {
+            // ajax cancel an item
+            $.ajax({
+                url : "cashier/cashier_controller/ajax_cancel_item/"+sku,
+                type: "POST",
+                dataType: "JSON",
+                success: function(data)
+                {
+                    //if success reload ajax table
+                    $('#modal_form').modal('hide');
+                    $('#modal_form_add_to_cart').modal('hide');
+                    reload_table();
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Unable to cancel this item');
+                }
+            });
+        }
+
         function edit_customer(id) // for customer table
         {
             save_method = 'update-customer';
@@ -642,7 +669,7 @@
 
         function reload_table()
         {
-            table.ajax.reload(null,false); //reload datatable ajax 
+            table.ajax.reload(null,false); //reload datatable ajax
         }
          
         function save()
@@ -733,6 +760,8 @@
                         $('#modal_form_add_stock').modal('hide');
                         $('#modal_form_damaged_items').modal('hide');
                         $('#modal_form_privileges').modal('hide');
+                        $('#modal_payment').modal('hide');
+                        $('#modal_form_add_to_cart').modal('hide');
                         reload_table();
                     }
                     else
