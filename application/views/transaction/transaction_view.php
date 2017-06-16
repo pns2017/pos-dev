@@ -121,7 +121,7 @@
           <!--Bordered Table-->
           <!--===================================================-->
           <div class="panel-body tran_container">
-            <div class="table-responsive">
+            <div class="table-responsive table-bordered">
               <table id="cashier-table" class="table">
                 <thead>
                   <tr>
@@ -159,7 +159,11 @@
                 <div class="media-body">
                   <p class="text-muted mar-no">Number of Items
                   </p>
-                  <p class="text-2x mar-no text-thin">543
+                  <p class="text-2x mar-no text-thin">
+                    <span id="total_items"></span>
+                    <?php
+                        //echo $this->cashier->get_total_items();
+                    ?>
                   </p> 
                 </div>
               </div>
@@ -175,7 +179,10 @@
                 <div class="media-body">
                   <p class="text-muted mar-no">Total Payable
                   </p>
-                  <p class="text-2x mar-no text-thin">654
+                  <p class="text-2x mar-no text-thin">
+                    <?php
+                        //echo number_format($this->cashier->get_subtotal(), 2, '.', ',');
+                    ?>
                   </p>
                 </div>
               </div>
