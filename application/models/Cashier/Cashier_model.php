@@ -61,7 +61,51 @@ class Cashier_model extends CI_Model {
 
 		$query = $this->db->get();
 		return $query->result();
-	}		
+	}
+
+	// check for duplicates in the database table for validation - sku
+    function get_duplicates($sku)
+    {   
+        $this->db->from($this->table);
+        $this->db->where('sku',$sku);
+
+        $query = $this->db->get();
+
+        return $query;
+    }
+
+    // get current quantity of an item for validation
+	function get_quantity($sku)
+	{
+		$this->db->select('quantity');
+		$this->db->from($this->table);
+		$this->db->where('sku',$sku);
+		$query = $this->db->get();
+
+		$row = $query->row();
+
+		return $row->quantity;
+	}
+
+	// get subtotal of items in the cart
+	function get_subtotal()
+	{
+	    $this->db->select_sum('extended');
+	    $this->db->from($this->table);
+	    $query = $this->db->get();
+
+	    return $query->row()->extended;
+	}
+
+	// get total number of items in the cart 
+	function get_total_items()
+	{
+	    $this->db->select_sum('quantity');
+	    $this->db->from($this->table);
+	    $query = $this->db->get();
+
+	    return $query->row()->quantity;
+	}
 
 	function count_filtered()
 	{
@@ -83,9 +127,20 @@ class Cashier_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	public function update($where, $data)
+	// update quantity and extended
+	public function update($sku, $quantity, $extended)
 	{
-		$this->db->update($this->table, $data, $where);
+		$this->db->where('sku',$sku);
+		$this->db->set('quantity', 'quantity + ' . (int) $quantity, FALSE);
+		$this->db->set('extended', 'extended + ' . (int) $extended, FALSE);
+		$this->db->update($this->table);
+
 		return $this->db->affected_rows();
+	}
+
+	public function delete_by_id($sku)
+	{
+		$this->db->where('sku', $sku);
+		$this->db->delete($this->table);
 	}
 }
