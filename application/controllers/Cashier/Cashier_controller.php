@@ -51,7 +51,7 @@ class Cashier_controller extends CI_Controller {
       $row[] = $cashier->extended;
 
       //add html for action
-      $row[] = '<a class="icon-wrap icon-wrap-xs icon-circle bg-danger" href="javascript:void(0)" title="Cancel" onclick="cancel('."'".$cashier->sku."'".')"><i class="fa fa-times"></i> </a>';
+      $row[] = '<a class="icon-wrap icon-wrap-xs icon-circle bg-danger" href="javascript:void(0)" title="Cancel" onclick="cancel_item('."'".$cashier->sku."'".')"><i class="fa fa-times"></i> </a>';
     
       $data[] = $row;
     }
@@ -70,19 +70,42 @@ class Cashier_controller extends CI_Controller {
   {
       $this->_validate();
 
+      // calculate discount here ---------------------------------------------------------------------------------------
+
       // calculate extended
       $extended = $this->input->post('quantity') * $this->input->post('item_unit_price');
       $extended_value = number_format((float)$extended, 2, '.', '');
 
-      $data = array(
+      // check for duplicates
+      $duplicates = $this->cashier->get_duplicates($this->input->post('item_sku'));
+
+      // if the sku is already in the cart. just update quantity and extended
+      if ($duplicates->num_rows() != 0)
+      {
+          // add current quantity as well as current extended value
+          $this->cashier->update($this->input->post('item_sku'), $this->input->post('quantity'), $extended_value);   
+      }
+      // if no the same sku found in cart
+      else
+      {
+          $data = array(
               'sku' => $this->input->post('item_sku'),
               'name' => $this->input->post('item_name'),
               'quantity' => $this->input->post('quantity'),
               'unit_price' => $this->input->post('item_unit_price'),
-              'discount' => $this->input->post(0),
-              'extended' => $this->input->post($extended_value),
+              'discount' => '0',
+              'extended' => $extended_value,
           );
-      $insert = $this->cashier->save($data);
+          $this->cashier->save($data);
+      }
+
+      echo json_encode(array("status" => TRUE));
+  }
+
+  // cancelling an item from cart
+  public function ajax_cancel_item($sku)
+  {
+      $this->cashier->delete_by_id($sku);
       echo json_encode(array("status" => TRUE));
   }
 
@@ -130,14 +153,26 @@ class Cashier_controller extends CI_Controller {
             // if more than 0 (positive value)
             else
             {
+              // quantity for items already in cart
+              $quantity = 0;
+              // check for duplicates
+              $duplicates = $this->cashier->get_duplicates($this->input->post('item_sku'));
+
+              // if the sku is already in the cart. get quantity value
+              if ($duplicates->num_rows() != 0)
+              {
+                  $quantity = $this->cashier->get_quantity($this->input->post('item_sku'));
+              }
+
               // validate if allowed (stock out should not be greater than the current in stock value)
+              // subtract in stock with the item's quantity already in cart
               $in_stock = $this->inventory->get_in_stock($this->input->post('item_sku'));
 
               // if greater than the current in stock value
-              if ($this->input->post('quantity') > $in_stock)
+              if ($this->input->post('quantity') > ($in_stock - $quantity))
               {
                 $data['inputerror'][] = 'quantity';
-                $data['error_string'][] = 'Quantity should not be greater than the current In Stock value';
+                $data['error_string'][] = 'Item quantity to purchase should not be greater than the current In Stock value. If not, check cart for the same item.';
                 $data['status'] = FALSE;  
               }             
             }
