@@ -104,3 +104,5 @@ $route['delete-user/(:num)'] = 'users/users_controller/ajax_delete/$1';
 $route['transaction-page'] = 'cashier/cashier_controller/index';
 
 $route['view-product/(:num)'] = 'inventory/inventory_controller/ajax_edit/$1';
+
+$route['delete-item/(:num)'] = 'cashier/cashier_controller/item_delete/$1';

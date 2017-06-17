@@ -51,7 +51,7 @@ class Cashier_controller extends CI_Controller {
       $row[] = $cashier->extended;
 
       //add html for action
-      $row[] = '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Cancel" onclick="cancel('."'".$cashier->sku."'".')"><i class="fa fa-times"></i> </a>';
+      $row[] = '<a class="icon-wrap icon-wrap-xs icon-circle bg-danger" href="javascript:void(0)" title="Cancel" onclick="cancel('."'".$cashier->sku."'".')"><i class="fa fa-times"></i> </a>';
     
       $data[] = $row;
     }

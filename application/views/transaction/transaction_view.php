@@ -46,14 +46,14 @@
             </div>
           </div> 
           <?php
-// get products list from inventory 
-for($i = 0; $i < count($inventory); $i++){
-$products_list[$i] = $inventory[$i]->sku . ': ' . $inventory[$i]->name . ' ----- Php ' . $inventory[$i]->unit_price;
-}
-// converting php array to javascript (json)
-$json_list_products = json_encode($products_list);
-// output json_list to be retrieved by javascript for combo box (the-basic.js)
-?>
+            // get products list from inventory 
+            for($i = 0; $i < count($inventory); $i++){
+            $products_list[$i] = $inventory[$i]->sku . ': ' . $inventory[$i]->name . ' ----- Php ' . $inventory[$i]->unit_price;
+            }
+            // converting php array to javascript (json)
+            $json_list_products = json_encode($products_list);
+            // output json_list to be retrieved by javascript for combo box (the-basic.js)
+            ?>
           <span id="json_list_products" class="hidden">
             <?php echo $json_list_products ?>
           </span>
@@ -69,7 +69,7 @@ $json_list_products = json_encode($products_list);
             <!--Profile Widget-->
             <!--===================================================-->    
               <div class="col-md-6 col-sm-3">
-                <a href="#"> 
+                <a href="" class="item-list"> 
                   <div class="panel media pad-all"> 
                     <div class="media-left">
                       <span class="icon-wrap icon-wrap-sm icon-circle bg-primary">
@@ -77,12 +77,10 @@ $json_list_products = json_encode($products_list);
                       </span>
                     </div>
                     <div class="media-body">
-                      <p class="text-2x mar-no text-thin">
-                        <?php echo $row->in_stock;?>
-                      </p>
-                      <p class="text-muted mar-no">
-                        <?php echo $row->name;?>
-                      </p>
+                      <p class="text-2x mar-no text-thin"><?php echo $row->in_stock;?></p>
+                      <p class="text-muted mar-no" id="item-name"><?php echo $row->name;?></p>
+                      <p class="text-muted mar-no">SKU#: <span id="item-id"><?php echo $row->sku;?></span></p>
+                      <p id="#price" class="text-muted mar-no">Price: <?php echo $row->unit_price;?></p>
                     </div>     
                   </div>
                 </a>
@@ -107,14 +105,14 @@ $json_list_products = json_encode($products_list);
             </form>
           </div>
           <?php
-// get customers list from customers 
-for($i = 0; $i < count($customers); $i++){
-$customers_list[$i] = $customers[$i]->lastname . ', ' . $customers[$i]->firstname . ' ' . $customers[$i]->middlename;
-}
-// converting php array to javascript (json)
-$json_list_customers = json_encode($customers_list);
-// output json_list to be retrieved by javascript for combo box (the-basic.js)
-?>
+            // get customers list from customers 
+            for($i = 0; $i < count($customers); $i++){
+            $customers_list[$i] = $customers[$i]->lastname . ', ' . $customers[$i]->firstname . ' ' . $customers[$i]->middlename;
+            }
+            // converting php array to javascript (json)
+            $json_list_customers = json_encode($customers_list);
+            // output json_list to be retrieved by javascript for combo box (the-basic.js)
+            ?>
           <span id="json_list_customers" class="hidden">
             <?php echo $json_list_customers ?>
           </span>
