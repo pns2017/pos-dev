@@ -11,12 +11,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			//$this->db->from($this->table);
 			
-			
+			$hash = password_verify($password);
 			
 			$this->db->select('user_id, username, password, lastname, firstname,removed, administrator, cashier, inventory, supplier, customer, user, report ');
 			$this->db->from('users');
 			$this->db->where('username', $username);
-			$this->db->where('password', $password);
+			$this->db->where('password', $hash);
 			$this->db->where('removed', 0 );
 			$this->db->limit(1);
 			$query = $this->db->get();
