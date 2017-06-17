@@ -73,8 +73,9 @@ th#cart.text-center{
   margin: 0;
 }
 div.panel-body.tran_container{
-      height: 300px;
-      overflow: scroll;
+      height: 250px;
+      overflow-y: scroll;
+      overflow-x: hidden;
 }
 /*quantity, action*/
 #cashier-table td:nth-child(3),
