@@ -201,7 +201,41 @@
                           } 
                         }               
                     });           
-            }            
+            }
+            else if(tableID == "cashier-table")
+            {
+                    table = $('#cashier-table').DataTable({ 
+
+                        searching: false, paging: false,
+                 
+                        "processing": true, //Feature control the processing indicator.
+                        "serverSide": true, //Feature control DataTables' server-side processing mode.
+                        "order": [], //Initial no order.
+                 
+                        // Load data for the table's content from an Ajax source
+                        "ajax": {
+                            "url": "cashier/cashier_controller/ajax_list",
+                            "type": "POST",
+                        },
+                 
+                        //Set column definition initialisation properties.
+                        "columnDefs": [
+                        { 
+                            "targets": [ -1 ], //last column
+                            "orderable": false, //set not orderable
+                        },
+                        ],
+
+                        "rowCallback": function( row, data, index ) {
+                          var discount = data[4],
+                              $node = this.api().row(row).nodes().to$();
+
+                          if (discount != '' && discount != '0') {
+                             $node.css('background-color', '#99ffdd');
+                          } 
+                        }               
+                    });           
+            }              
         });
 
         function view_product(sku)
