@@ -16,7 +16,7 @@
                  
                         // Load data for the table's content from an Ajax source
                         "ajax": {
-                            "url": "customers/customers_controller/ajax_list",
+                            "url": window.location.href ='showlist-customers',
                             "type": "POST",
                         },
                  
@@ -39,7 +39,7 @@
                  
                         // Load data for the table's content from an Ajax source
                         "ajax": {
-                            "url": "suppliers/suppliers_controller/ajax_list",
+                            "url": window.location.href ='showlist-suppliers',
                             "type": "POST",
                         },
                  
@@ -73,7 +73,7 @@
                  
                         // Load data for the table's content from an Ajax source
                         "ajax": {
-                            "url": "inventory/inventory_controller/ajax_list",
+                            "url": window.location.href ='showlist-inventory',
                             "type": "POST",
                         },
                  
@@ -116,7 +116,7 @@
                  
                         // Load data for the table's content from an Ajax source
                         "ajax": {
-                            "url": "supply_logs/supply_logs_controller/ajax_list",
+                            "url": window.location.href ='showlist-supply-logs',
                             "type": "POST",
                         },
                  
@@ -148,7 +148,7 @@
                  
                         // Load data for the table's content from an Ajax source
                         "ajax": {
-                            "url": "damaged_items/damaged_items_controller/ajax_list",
+                            "url": window.location.href ='showlist-damaged_items',
                             "type": "POST",
                         },
                  
@@ -180,7 +180,7 @@
                  
                         // Load data for the table's content from an Ajax source
                         "ajax": {
-                            "url": "users/users_controller/ajax_list",
+                            "url": window.location.href ='showlist-users',
                             "type": "POST",
                         },
                  
@@ -214,7 +214,7 @@
                  
                         // Load data for the table's content from an Ajax source
                         "ajax": {
-                            "url": "cashier/cashier_controller/ajax_list",
+                            "url":  window.location.href ='cashier-showitem-list',
                             "type": "POST",
                         },
                  
