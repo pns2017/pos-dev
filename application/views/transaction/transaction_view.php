@@ -10,32 +10,18 @@
   </div>
   <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   <!--End page title-->
-  <!--Breadcrumb-->
-  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  <ol class="breadcrumb" >
-    <li>
-      <a href="<?php echo base_url('dashboard').'dashboard';?>">Dashboard
-      </a>
-    </li>
-    <li>
-      <a>Transaction
-      </a>
-    </li>
-  </ol>
-  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  <!--End breadcrumb-->
   <!--Page content-->
   <!--===================================================-->
   <div id="page-content">  
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <!--Item Name Searchbox-->
           <!--=================================================================================-->
           <div class="input-group">
             <form role="search">
               <div id="the-basics-products">
-                <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search Item" style="width:500px; font-size: 18px;">
+                <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search Item" style="width:320px; font-size: 18px;">
               </div>
             </form>
             <div class="input-group-btn">
@@ -68,7 +54,7 @@
             foreach ($inventory as $row){?>
             <!--Profile Widget-->
             <!--===================================================-->    
-              <div class="col-md-6 col-sm-3">
+              <!-- <div class="col-md-6 col-sm-3">
                 <a href="" class="item-list"> 
                   <div class="panel media pad-all"> 
                     <div class="media-left">
@@ -84,16 +70,29 @@
                     </div>     
                   </div>
                 </a>
+              </div> -->
+              <div class="col-md-4 col-sm-3 col-lg-4">
+              <!--Sales-->
+              <a href="" class="item-list"> 
+              <div class="panel panel-primary panel-colorful" id="item-list-button">
+                <div class="pad-all text-center">
+                  <span class="text-5x text-thin"><?php echo $row->in_stock;?></span>
+                  <p><?php echo $row->name;?></p>
+                  <i class="fa fa-shopping-cart"></i>
+                </div>
               </div>
+            </a>
+            </div>
+
           <?php }?>  
         </div> 
         <!-- end of col-md-6 -->
-        <div class="col-md-6">
+        <div class="col-md-8">
           <div class="input-group">
             <form role="search">
               <div class="input-group">
                 <div id="the-basics-customers">
-                  <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search Customer" style="width:500px; font-size: 18px;">
+                  <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search Customer" style="width:700px; font-size: 18px;">
                 </div>
                 <div class="input-group-btn">
                   <button class="btn btn-mint" style="margin-top: -3px; height:48px; width:60px;" >
@@ -121,7 +120,7 @@
           <!--Bordered Table-->
           <!--===================================================-->
           <div class="panel-body tran_container">
-            <div class="table-responsive table-bordered">
+            <div class="table-responsive">
               <table id="cashier-table" class="table">
                 <thead>
                   <tr>
@@ -159,11 +158,7 @@
                 <div class="media-body">
                   <p class="text-muted mar-no">Number of Items
                   </p>
-                  <p class="text-2x mar-no text-thin">
-                    <span id="total_items"></span>
-                    <?php
-                        //echo $this->cashier->get_total_items();
-                    ?>
+                  <p class="text-2x mar-no text-thin">543
                   </p> 
                 </div>
               </div>
@@ -179,10 +174,7 @@
                 <div class="media-body">
                   <p class="text-muted mar-no">Total Payable
                   </p>
-                  <p class="text-2x mar-no text-thin">
-                    <?php
-                        //echo number_format($this->cashier->get_subtotal(), 2, '.', ',');
-                    ?>
+                  <p class="text-2x mar-no text-thin">654
                   </p>
                 </div>
               </div>
@@ -194,7 +186,7 @@
               </a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a onclick="view_payment_report();" class="btn btn-lg btn-danger">Payment
+              <a class="btn btn-lg btn-danger">Payment
               </a>
             </div>
           </div>
