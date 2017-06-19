@@ -34,7 +34,7 @@
           <?php
             // get products list from inventory 
             for($i = 0; $i < count($inventory); $i++){
-            $products_list[$i] = $inventory[$i]->sku . ': ' . $inventory[$i]->name . ' ----- Php ' . $inventory[$i]->unit_price;
+            $products_list[$i] = $inventory[$i]->sku . ': ' . $inventory[$i]->name . ' ----- Php ' . number_format($inventory[$i]->unit_price, 2, '.', ',');
             }
             // converting php array to javascript (json)
             $json_list_products = json_encode($products_list);
@@ -158,7 +158,7 @@
                 <div class="media-body">
                   <p class="text-muted mar-no">Number of Items
                   </p>
-                  <p class="text-2x mar-no text-thin">543
+                  <p class="text-2x mar-no text-thin" id ="item_count" align="center" style="font-weight: bold">
                   </p> 
                 </div>
               </div>
@@ -174,7 +174,7 @@
                 <div class="media-body">
                   <p class="text-muted mar-no">Total Payable
                   </p>
-                  <p class="text-2x mar-no text-thin">654
+                  <p class="text-2x mar-no text-thin" id ="subtotal" align="center" style="font-weight: bold">
                   </p>
                 </div>
               </div>
