@@ -239,8 +239,9 @@
                           if (discount != '' && discount != '0') {
                              $node.css('background-color', '#99ffdd');
                           } 
-                        }               
-                    });           
+                        }           
+                    });  
+                    set_transaction_details();
             }          
         });
 
@@ -249,6 +250,30 @@
             $("#userfile").val("");
         });
         
+
+        // refresh transaction item count and subtotal
+        function set_transaction_details()
+        {
+            // ajax cancel an item
+            $.ajax({
+                url : "cashier/cashier_controller/ajax_set_transaction",
+                type: "POST",
+                dataType: "JSON",
+                success: function(data)
+                {
+                    // updating total payable
+                    $('#subtotal').html(data.subtotal);
+
+                    // updating total items
+                    $('#item_count').html(data.item_count);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('');
+                }
+            });
+        }
+
         function view_product(sku)
         {
             if(document.getElementById('form_view') != null)
@@ -378,8 +403,7 @@
         }
 
         function add_supplier() // ---> calling for the Add Modal form
-        {
-            
+        {     
             save_method = 'add-supplier';
             text = 'Add Supplier';
 
@@ -479,6 +503,11 @@
                     $('#modal_form').modal('hide');
                     $('#modal_form_add_to_cart').modal('hide');
                     reload_table();
+
+                    // updating total payable
+                    $('#subtotal').html(data.subtotal);
+                    // updating total items
+                    $('#item_count').html(data.item_count);
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
@@ -763,6 +792,15 @@
                         $('#modal_payment').modal('hide');
                         $('#modal_form_add_to_cart').modal('hide');
                         reload_table();
+
+                        // updating total items and payable for cashier
+                        if(save_method == 'add-to-cart') 
+                        {
+                            $('#item_count').html(data.item_count);
+                            $('#subtotal').html(data.subtotal);
+
+                            $('#srch-term').typeahead('val', '');
+                        }
                     }
                     else
                     {
