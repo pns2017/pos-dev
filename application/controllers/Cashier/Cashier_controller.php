@@ -56,12 +56,23 @@ class Cashier_controller extends CI_Controller {
       $data[] = $row;
     }
 
+    // get item count to update
+    $item_count = $this->cashier->get_total_items();
+
+    // get subtotal to update
+    $subtotal = $this->cashier->get_subtotal();
+
     $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->cashier->count_all(),
             "recordsFiltered" => $this->cashier->count_filtered(),
             "data" => $data,
+
+            // item count and subtotal inserted into output array
+            "subtotal" => $subtotal, 
+            "item_count" => $item_count,
         );
+
     //output to json format
     echo json_encode($output);
   }
@@ -99,14 +110,41 @@ class Cashier_controller extends CI_Controller {
           $this->cashier->save($data);
       }
 
-      echo json_encode(array("status" => TRUE));
+      // get item count to update
+      $item_count = $this->cashier->get_total_items();
+
+      // get subtotal to update
+      $subtotal = $this->cashier->get_subtotal();
+
+
+      echo json_encode(array("status" => TRUE, "subtotal" => $subtotal, "item_count" => $item_count));
+  }
+
+  // get transaction details when page is reopened with cashier data not removed
+  public function ajax_set_transaction()
+  {
+      // get item count to update
+      $item_count = $this->cashier->get_total_items();
+
+      // get subtotal to update
+      $subtotal = $this->cashier->get_subtotal();
+
+
+      echo json_encode(array("status" => TRUE, "subtotal" => $subtotal, "item_count" => $item_count));
   }
 
   // cancelling an item from cart
   public function ajax_cancel_item($sku)
   {
       $this->cashier->delete_by_id($sku);
-      echo json_encode(array("status" => TRUE));
+
+      // get item count to update
+      $item_count = $this->cashier->get_total_items();
+
+      // get subtotal to update
+      $subtotal = $this->cashier->get_subtotal();
+
+      echo json_encode(array("status" => TRUE, "subtotal" => $subtotal, "item_count" => $item_count));
   }
 
   private function _validate()
