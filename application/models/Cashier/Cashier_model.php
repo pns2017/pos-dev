@@ -94,7 +94,14 @@ class Cashier_model extends CI_Model {
 	    $this->db->from($this->table);
 	    $query = $this->db->get();
 
-	    return $query->row()->extended;
+	    $extended = $query->row()->extended;
+
+	    if ($extended != '')
+	    {
+			$extended = 'Php ' . number_format($extended, 2, '.', ',');	    	
+	    }
+
+	    return $extended;
 	}
 
 	// get total number of items in the cart 
