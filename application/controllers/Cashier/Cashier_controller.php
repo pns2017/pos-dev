@@ -144,6 +144,14 @@ class Cashier_controller extends CI_Controller {
       echo json_encode(array("status" => TRUE, "subtotal" => $subtotal, "item_count" => $item_count));
   }
 
+  // cancelling an item from cart
+  public function ajax_cancel_transaction()
+  {
+      $this->cashier->truncate_cashier();
+
+      echo json_encode(array("status" => TRUE));
+  }
+
   private function _validate()
   {
       $data = array();
