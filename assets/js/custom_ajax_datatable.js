@@ -489,7 +489,7 @@
                 }
             });
         }
-
+        // cancel a single item from cart
         function cancel_item(sku)
         {
             // ajax cancel an item
@@ -512,6 +512,35 @@
                 error: function (jqXHR, textStatus, errorThrown)
                 {
                     alert('Unable to cancel this item');
+                }
+            });
+        }
+        // provide event listener function for link buttons
+        document.getElementById('cancel_transaction').addEventListener('click', cancel_transaction, true);
+
+        // cancelling whole transaction
+        function cancel_transaction()
+        {
+            // ajax cancel an item
+            $.ajax({
+                url : "cashier/cashier_controller/ajax_cancel_transaction",
+                type: "GET",
+                dataType: "JSON",
+                success: function(data)
+                {
+                    //if success reload ajax table
+                    $('#modal_form').modal('hide');
+                    $('#modal_form_add_to_cart').modal('hide');
+                    reload_table();
+
+                    // updating total payable
+                    $('#subtotal').html(data.subtotal);
+                    // updating total items
+                    $('#item_count').html(data.item_count);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Unable to cancel transaction');
                 }
             });
         }
