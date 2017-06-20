@@ -104,3 +104,9 @@ div.panel-body.tran_container{
 #div-itemlist{
   height: 200px;
 }
+
+@media screen and (min-width: 992px) {
+  input#srch-term.typeahead.form-control.tt-input{
+    width: 260px;
+  }
+}
