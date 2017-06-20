@@ -108,3 +108,27 @@ $route['view-product/(:num)'] = 'inventory/inventory_controller/ajax_edit/$1';
 $route['delete-item/(:num)'] = 'cashier/cashier_controller/item_delete/$1';
 
 $route['cashier-showitem-list'] = 'cashier/cashier_controller/ajax_list';
+
+
+
+
+//************************************** REPORT
+//**************************************
+			//** SALES **//
+$route['report/daily-sales'] = 'reports/report_controller/sales_daily_report';
+
+$route['report/weekly-sales'] = 'reports/report_controller/sales_weekly_report';
+
+$route['report/monthly-sales'] = 'reports/report_controller/sales_monthly_report';
+
+$route['report/yearly-sales'] = 'reports/report_controller/sales_yearly_report';
+
+			//** INVENTORY **//
+$route['report/daily-inventory'] = 'reports/report_controller/inventory_daily_report';
+
+$route['report/weekly-inventory'] = 'reports/report_controller/inventory_weekly_report';
+
+$route['report/monthly-inventory'] = 'reports/report_controller/inventory_monthly_report';
+
+$route['report/yearly-inventory'] = 'reports/report_controller/inventory_yearly_report';
+

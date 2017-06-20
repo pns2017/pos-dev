@@ -140,8 +140,28 @@
 
                                         <!--Submenu-->
                                         <ul class="collapse">
-                                            <li><a href="#">Sales</a></li>
-                                            <li><a href="#">Inventory</a></li>
+                                            <li><a href="#">Sales
+                                                <i class="arrow"></i>
+                                                </a>
+
+                                                <ul class="collapse">
+                                                     <li><a href="<?php echo base_url();?>report/daily-sales">Daily</a></li>
+                                                     <li><a href="<?php echo base_url();?>report/weekly-sales">Weekly</a></li>
+                                                     <li><a href="<?php echo base_url();?>report/monthly-sales">Monthly</a></li>
+                                                     <li><a href="<?php echo base_url();?>report/yearly-sales">Yearly</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Inventory
+                                                <i class="arrow"></i>
+                                                </a>
+
+                                                <ul class="collapse">
+                                                     <li><a href="<?php echo base_url();?>report/daily-inventory">Daily</a></li>
+                                                     <li><a href="<?php echo base_url();?>report/weekly-inventory">Weekly</a></li>
+                                                     <li><a href="<?php echo base_url();?>report/monthly-inventory">Monthly</a></li>
+                                                     <li><a href="<?php echo base_url();?>report/yearly-inventory">Yearly</a></li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
 
