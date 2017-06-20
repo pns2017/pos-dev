@@ -34,7 +34,7 @@
           <?php
             // get products list from inventory 
             for($i = 0; $i < count($inventory); $i++){
-            $products_list[$i] = $inventory[$i]->sku . ': ' . $inventory[$i]->name . ' ----- Php ' . number_format($inventory[$i]->unit_price, 2, '.', ',');
+            $products_list[$i] = $inventory[$i]->sku . ': ' . $inventory[$i]->name . ' ----- $ ' . number_format($inventory[$i]->unit_price, 2, '.', ',');
             }
             // converting php array to javascript (json)
             $json_list_products = json_encode($products_list);
@@ -95,7 +95,7 @@
                   <input class="typeahead form-control" id="srch-term" type="text" placeholder="Search Customer" style="width:700px; font-size: 18px;">
                 </div>
                 <div class="input-group-btn">
-                  <button class="btn btn-mint" style="margin-top: -3px; height:48px; width:60px;" >
+                  <button class="btn btn-mint" style="margin-top: -3px; height:48px; width:60px;" disabled>
                     <i class="fa fa-user" style="font-size: 25px;">
                     </i>
                   </button>
@@ -180,11 +180,21 @@
               </div>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="javascript:void(0)" class="btn btn-lg btn-primary">Cancel
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">$</span>
+                <input name="cash" type="number" class="form-control" placeholder="Enter Cash" aria-describedby="sizing-addon1" style="width:300px;">
+
+                <span class="input-group-btn">
+                  <button class="btn btn-mint" type="button" style="border-radius: 0 !important;">Discount</button>
+                </span>
+                <input type="text" class="form-control" placeholder="Discount" value="0.00" style="width:150px;" disabled>
+              </div>
+              
+              <a href="" id="cancel_transaction" class="btn btn-lg btn-primary" style="width:130px;">Cancel
               </a>
-              <a href="javascript:void(0)" class="btn btn-lg btn-info">Clear List
-              </a>
+
             </div>
+            <br>
             <div class="btn-group btn-group-justified">
               <a class="btn btn-lg btn-danger">Payment
               </a>
@@ -371,6 +381,72 @@
           <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">
             <i class="fa fa-cart-plus">
             </i> &nbsp;Add to Cart
+          </button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <i class="fa fa-times">
+            </i> &nbsp;Cancel
+          </button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+  <!-- End Bootstrap modal -->
+
+  <!-- Bootstrap modal for ADD TO CART -->
+  <div class="modal fade" id="modal_form_discount" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;
+            </span>
+          </button>
+          <h3 class="modal-title">Discount
+          </h3>
+        </div>
+        <div class="modal-body form">
+          <!-- <div class="form-group">
+<div align="center"><img id="image" style="width:200px; height:200px;"></div>
+</div>
+<hr> -->
+          <form action="#" id="form_discount" class="form-horizontal">
+            <!-- <input type="hidden" value="" name="item_sku"/>
+            <input type="hidden" value="" name="item_name"/>
+            <input type="hidden" value="" name="item_unit_price"/>
+            <input type="hidden" value="" name="item_in_stock"/> -->
+            <div class="form-body">
+              
+              <div class="form-group">
+                <label class="control-label col-md-3" style="font-size: 18px; font-weight: bold;">Quantity :
+                </label>
+                <div class="col-md-9">
+                  <input style="font-size: 18px; font-weight: bold;" name="quantity" placeholder="Quantity" class="form-control" type="number" value="1">
+                  <span class="help-block">
+                  </span>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group">
+                <label class="control-label col-md-3" style="font-size: 18px; font-weight: bold;">Remarks :
+                </label>
+                <div class="col-md-9">
+                  <input style="font-size: 18px; font-weight: bold;" name="remarks" placeholder="Discount remarks" class="form-control" type="text">
+                  <span class="help-block">
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">
+            <i class="fa fa-cart-plus">
+            </i> &nbsp;Okay
           </button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">
             <i class="fa fa-times">
