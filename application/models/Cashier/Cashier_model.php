@@ -98,7 +98,7 @@ class Cashier_model extends CI_Model {
 
 	    if ($extended != '')
 	    {
-			$extended = 'Php ' . number_format($extended, 2, '.', ',');	    	
+			$extended = '$ ' . number_format($extended, 2, '.', ',');	    	
 	    }
 
 	    return $extended;
@@ -149,5 +149,11 @@ class Cashier_model extends CI_Model {
 	{
 		$this->db->where('sku', $sku);
 		$this->db->delete($this->table);
+	}
+
+	public function truncate_cashier()
+	{
+		$this->db->from($this->table);
+		$this->db->truncate(); 
 	}
 }
