@@ -130,6 +130,19 @@ class Cashier_controller extends CI_Controller {
       echo json_encode(array("status" => TRUE, "subtotal" => $subtotal, "item_count" => $item_count));
   }
 
+  // set discount retrieve from form
+  public function ajax_set_discount()
+  {
+      // get discount value
+      $discount = $this->input->post('discount');
+
+      // get subtotal to update
+      $remarks = $this->input->post('remarks');
+
+
+      echo json_encode(array("status" => TRUE, "discount" => $discount, "remarks" => $remarks));
+  }
+
   // cancelling an item from cart
   public function ajax_cancel_item($sku)
   {
