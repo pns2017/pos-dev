@@ -648,7 +648,116 @@
                     alert('Error get data from ajax');
                 }
             });
-        }         
+        }
+
+        function set_discount() // for discount modal
+        {
+            save_method = 'set-discount';
+            $('#form')[0].reset(); // reset form on modals
+            $('#form_discount')[0].reset(); // reset form on modals
+            $('#form_add_to_cart')[0].reset(); // reset form on modals
+            $('.form-group').removeClass('has-error'); // clear error class
+            $('.help-block').empty(); // clear error string
+         
+            //Ajax Load data from ajax
+            $.ajax({
+                url : "cashier/cashier_controller/ajax_set_discount",
+                type: "GET",
+                dataType: "JSON",
+                success: function(data)
+                {
+                    if($('#subtotal').html()!="")
+                    {
+                        var subtotal = $("#subtotal").html().split(' ')[1];
+
+                        subtotal = subtotal.replace(/\,/g,'');
+
+                        $("[name='percent']").on('keyup', function()
+                        { 
+                            if ($("[name='percent']").val()!="")
+                            {
+                                var percent = $("[name='percent']").val();
+                                // subtotal = parseFloat(subtotal.split('.')[0]);
+                                percent = parseFloat(percent) / 100;
+                                // console.log(subtotal); console.log(percent);
+                                var discount =  subtotal * percent;
+
+                                $("[name='discount']").val(discount);   
+                            }
+                            else
+                            {
+                                $("[name='discount']").val("0.00");
+                            }
+                        });
+
+                        $("[name='discount']").on('keyup', function()
+                        { 
+                            if ($("[name='discount']").val()!="")
+                            {  
+                                var discount = $("[name='discount']").val();
+
+                                discount = parseFloat(discount) / subtotal;
+                                // console.log(subtotal); console.log(percent);
+                                var percent =  discount * 100;
+
+                                $("[name='percent']").val(percent);
+                            }
+                            else
+                            {
+                                $("[name='percent']").val("0");
+                            }
+                        });
+
+                        var discount = $('#discount').val();
+                        //var discount = document.getElementById('discount').value;
+                        // alert(discount);
+                        //$('#discount').val("0.89");
+
+                        // updating total payable
+                        // $('#discount').html(data.discount);
+                        $("[name='discount']").val(discount);
+
+                        discount = parseFloat(discount) / subtotal;
+                        
+                        var percent =  discount * 100;
+
+                        $("[name='percent']").val(percent);
+
+                        // // updating total items
+                        // $('#item_count').html(data.item_count);
+
+                        $('#modal_form_discount').modal('show'); // show bootstrap modal when complete loaded
+                        $('.modal-title').text('Set Discount'); // Set title to Bootstrap modal title
+                    }
+                    else
+                    {
+                        alert('No purchase amount to discount');       
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Error get data from ajax');
+                }
+            });
+        }
+
+        function save_discount() // for discount modal
+        {
+            var discount = $("[name='discount']").val();
+
+            if (discount != "")
+            {
+                document.getElementById('discount').value = parseFloat(discount).toFixed(2);
+            }
+            else
+            {
+                document.getElementById('discount').value =  parseFloat(0).toFixed(2);   
+            }
+            
+            $('#modal_form_discount').modal('hide');
+        }  
+
+        
 
         // adding stock dialog opener
         function add_stock(sku)
