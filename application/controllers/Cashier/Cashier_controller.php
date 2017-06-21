@@ -14,12 +14,9 @@ class Cashier_controller extends CI_Controller {
 
   public function index()
   { 	
-    // $user = $this->session->username;
-    // if($user == ''){
-    //     redirect('/');
-    // }
-    // else{
-    
+    if($this->session->userdata('user_id') == ''){
+      redirect('error500');
+    }
 
     // get products list (SKU and product name) for dropdown on the add stock form
     $data['inventory'] = $this->inventory->get_products_list();

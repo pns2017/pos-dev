@@ -76,6 +76,8 @@
                                             <li><a href="<?php echo base_url();?>inventory-page">Products List</a></li>
                                             <li><a href="<?php echo base_url();?>supply-logs-page">Supply Logs</a></li>       
                                             <li><a href="<?php echo base_url();?>damaged-items-page">Damaged Items</a></li>
+                                            <li><a href="<?php echo base_url();?>borrwed-items">Borrowed Items</a></li>
+                                            
                                         </ul>
                                     </li>
                         

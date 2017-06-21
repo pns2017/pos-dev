@@ -14,6 +14,9 @@ class Inventory_controller extends CI_Controller {
 
 	public function index()
 	{
+	if($this->session->userdata('user_id') == ''){
+      redirect('error500');
+    }
 		// get suppliers list for dropdown on the add stock form
 		$data['suppliers'] = $this->suppliers->get_suppliers();
 
