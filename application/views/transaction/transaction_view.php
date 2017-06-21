@@ -185,9 +185,10 @@
                 <input name="cash" type="number" class="form-control" placeholder="Enter Cash" aria-describedby="sizing-addon1" style="width:300px;">
 
                 <span class="input-group-btn">
-                  <button class="btn btn-mint" type="button" style="border-radius: 0 !important;">Discount</button>
+                  <button class="btn btn-mint" type="button" style="border-radius: 0 !important;" onclick="set_discount()">Discount</button>
                 </span>
-                <input type="text" class="form-control" placeholder="Discount" value="0.00" style="width:150px;" disabled>
+                <input type="text" id="discount" class="form-control" placeholder="Discount" value="0.00" style="width:150px;" disabled>
+
               </div>
               
               <a href="" id="cancel_transaction" class="btn btn-lg btn-primary" style="width:130px;">Cancel
@@ -420,10 +421,17 @@
             <div class="form-body">
               
               <div class="form-group">
-                <label class="control-label col-md-3" style="font-size: 18px; font-weight: bold;">Quantity :
+                <label class="control-label col-md-3" style="font-size: 18px; font-weight: bold;">% :
                 </label>
                 <div class="col-md-9">
-                  <input style="font-size: 18px; font-weight: bold;" name="quantity" placeholder="Quantity" class="form-control" type="number" value="1">
+                  <input style="font-size: 18px; font-weight: bold;" name="percent" placeholder="By percentage" class="form-control" type="text" maxlength="2">
+                  <span class="help-block">
+                  </span>
+                </div>
+                <label class="control-label col-md-3" style="font-size: 18px; font-weight: bold;">Discount :
+                </label>
+                <div class="col-md-9">
+                  <input style="font-size: 18px; font-weight: bold;" name="discount" placeholder="Discount amount" class="form-control" type="number">
                   <span class="help-block">
                   </span>
                 </div>
@@ -444,7 +452,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">
+          <button type="button" id="btnSave" onclick="save_discount()" class="btn btn-primary">
             <i class="fa fa-cart-plus">
             </i> &nbsp;Okay
           </button>
